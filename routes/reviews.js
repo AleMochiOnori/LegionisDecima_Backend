@@ -76,9 +76,10 @@ router.patch("/:id", authMiddleware, async (req, res) => {
       return res.status(403).json({ message: "Azione non autorizzata" });
     
     // Aggiorna i campi della recensione
-    if (text) review.testo = text;
-    if (rating) review.voto = rating;
+    if (text) review.text = text;
+    if (rating) review.rating = rating;
     await review.save();
+    res.status(200).json(review);
   } catch (err) {
       console.error(err);
       res.status(500).json({ error: err.message });
